@@ -10,7 +10,7 @@ import {
   Platform,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { useCart } from './CartContext';
+import { useCart } from "@/context/CartContext";
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -25,7 +25,6 @@ const FloatingCart: React.FC = () => {
       styles.floatingContainer,
       isExpanded && styles.expandedContainer,
       Platform.select({
-        ios: styles.iosShadow,
         android: styles.androidShadow,
       })
     ]}>
@@ -105,8 +104,7 @@ const FloatingCart: React.FC = () => {
 const styles = StyleSheet.create({
   floatingContainer: {
     position: 'absolute',
-    bottom: Platform.select({ ios: 40, android: 20 }),
-    left: 20,
+    top: Platform.select({ ios: 60, android: 40 }), // Adjusted for status bar
     right: 20,
     backgroundColor: '#FFFFFF',
     borderRadius: 16,

@@ -6,10 +6,11 @@ import {
   Pressable,
   View,
   Text,
+  TouchableOpacity,
 } from "react-native";
 import { Image } from "expo-image";
 import { getAllProducts } from "../../api/ApiFunctions";
-
+import { useCart } from "@/context/CartContext";
 // Define the Product interface
 interface Product {
   productId: number;
@@ -22,7 +23,7 @@ const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { addToCart } = useCart();
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -98,9 +99,13 @@ const ProductList = () => {
                   {item.productName}
                 </Text>
                 <Text style={styles.productPrice}>${item.productPrice}</Text>
-                <Pressable style={styles.addButton}>
+                <TouchableOpacity
+                  style={styles.addButton}
+                  onPress={() => addToCart(item)}
+                  activeOpacity={0.7}
+                >
                   <Text style={styles.addButtonText}>Add to Cart</Text>
-                </Pressable>
+                </TouchableOpacity>
               </View>
             </View>
           </Pressable>
@@ -113,35 +118,35 @@ const ProductList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
   },
   listContainer: {
     padding: 12,
   },
   centerContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     padding: 20,
   },
   retryButton: {
     marginTop: 12,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: '#007AFF',
+    backgroundColor: "#007AFF",
     borderRadius: 8,
   },
   retryButtonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: "600",
   },
   card: {
     flex: 1,
     margin: 6,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     borderRadius: 12,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
@@ -149,18 +154,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
-    maxWidth: '47%', // Ensures consistent width with margins
+    maxWidth: "47%", // Ensures consistent width with margins
   },
   cardHeader: {
     padding: 8,
-    alignItems: 'flex-end',
+    alignItems: "flex-end",
   },
   favoriteIcon: {
     width: 24,
     height: 24,
   },
   productImage: {
-    width: '100%',
+    width: "100%",
     aspectRatio: 1, // Square image
     borderRadius: 8,
   },
@@ -172,29 +177,29 @@ const styles = StyleSheet.create({
   },
   productName: {
     fontSize: 14,
-    fontWeight: '500',
-    color: '#1F2937',
+    fontWeight: "500",
+    color: "#1F2937",
     minHeight: 40, // Accommodates 2 lines of text
     lineHeight: 20,
   },
   productPrice: {
     fontSize: 16,
-    fontWeight: '600',
-    color: '#059669',
+    fontWeight: "600",
+    color: "#059669",
     marginTop: 4,
   },
   addButton: {
-    backgroundColor: '#3B82F6',
+    backgroundColor: "#3B82F6",
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 6,
     marginTop: 8,
-    alignItems: 'center',
+    alignItems: "center",
   },
   addButtonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 14,
-    fontWeight: '500',
+    fontWeight: "500",
   },
 });
 
