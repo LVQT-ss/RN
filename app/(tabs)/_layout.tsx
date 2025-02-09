@@ -6,8 +6,6 @@ export default function TabLayout() {
   return (
     <CartProvider>
       <Tabs screenOptions={{ headerShown: false }}>
-        {" "}
-        {/* Hide headers globally */}
         <Tabs.Screen
           name="home"
           options={{
@@ -18,7 +16,7 @@ export default function TabLayout() {
                   focused ? "information-circle" : "information-circle-outline"
                 }
                 color={color}
-                size={24}
+                size={20}
               />
             ),
           }}
@@ -31,7 +29,7 @@ export default function TabLayout() {
               <Ionicons
                 name={focused ? "cart" : "cart-outline"}
                 color={color}
-                size={24}
+                size={20}
               />
             ),
           }}
