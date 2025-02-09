@@ -66,7 +66,7 @@ const ProductList = () => {
       <FlatList
         data={products}
         numColumns={2}
-        contentContainerStyle={styles.listContainer}
+        // contentContainerStyle={styles.listContainer}
         keyExtractor={(item: Product) => item.productId.toString()}
         renderItem={({ item }: { item: Product }) => (
           <Pressable
@@ -119,46 +119,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
+    paddingTop: Platform.OS === "ios" ? 0 : 20,
   },
   listContainer: {
-    padding: 12,
+    padding: 0,
   },
   centerContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 20,
-  },
-  retryButton: {
-    marginTop: 12,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: "#007AFF",
-    borderRadius: 8,
-  },
-  retryButtonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "600",
+    padding: 50,
   },
   card: {
     flex: 1,
-    margin: 6,
-    backgroundColor: "#FFFFFF",
+    margin: 8,
+    backgroundColor: "white",
     borderRadius: 12,
+    elevation: 3,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.1,
+    shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
-    maxWidth: "47%", // Ensures consistent width with margins
+    overflow: "hidden",
+    maxWidth: "47%", // Ensures 2 columns with margin
   },
   cardHeader: {
-    padding: 8,
-    alignItems: "flex-end",
+    position: "absolute",
+    top: 8,
+    right: 8,
+    zIndex: 1,
   },
   favoriteIcon: {
     width: 24,
@@ -166,40 +158,52 @@ const styles = StyleSheet.create({
   },
   productImage: {
     width: "100%",
-    aspectRatio: 1, // Square image
-    borderRadius: 8,
+    height: 150,
+    backgroundColor: "#f0f0f0",
   },
   cardFooter: {
     padding: 12,
   },
   productInfo: {
-    gap: 6,
+    gap: 8,
   },
   productName: {
     fontSize: 14,
-    fontWeight: "500",
-    color: "#1F2937",
-    minHeight: 40, // Accommodates 2 lines of text
-    lineHeight: 20,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 4,
+    height: 40, // Fixed height for 2 lines
   },
   productPrice: {
     fontSize: 16,
-    fontWeight: "600",
-    color: "#059669",
-    marginTop: 4,
+    fontWeight: "700",
+    color: "#2c3e50",
+    marginBottom: 8,
   },
   addButton: {
-    backgroundColor: "#3B82F6",
+    backgroundColor: "#007AFF",
     paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 6,
-    marginTop: 8,
+    borderRadius: 8,
     alignItems: "center",
+    marginTop: 4,
   },
   addButtonText: {
-    color: "#FFFFFF",
+    color: "white",
     fontSize: 14,
-    fontWeight: "500",
+    fontWeight: "600",
+  },
+  retryButton: {
+    marginTop: 16,
+    backgroundColor: "#007AFF",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  retryButtonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "600",
   },
 });
 
